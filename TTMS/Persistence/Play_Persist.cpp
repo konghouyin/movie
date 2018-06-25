@@ -250,6 +250,7 @@ play_t Play_Perst_SelectByName1(play_list_t list, char condt[])
 			}
 		}
 	}
+	data.id = 0;
 	fclose(fp);
 	return data;
 }

@@ -80,11 +80,11 @@ int GetPassword(char password[])
 //登录函数，提示用户输入用户名和密码，登录成功return 1，否则提示重新登录，超过3次，登录失败
 int SysLogin() {
 
+
 	Account_Srv_InitSys();
 	char usrname[20];
 	char passwd[20];
 	int i = 0, j;
-
 	system("cls");
 	kuangjia();
 	goto_xy(30, 6);

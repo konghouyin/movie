@@ -213,7 +213,7 @@ int Schedule_UI_Modify(int id) {
 
 	/*Load record*/
 	if (!Schedule_Srv_FetchByID(id, &rec)) {
-		printf("\t\t\t剧目ID不存在!\n\t\t\t按 [Enter] 返回\n\t\t\t");
+		printf("\t\t\t\t剧目ID不存在!\t\t\t按 [Enter] 返回\n\t\t\t");
 		getchar();
 		getchar();
 		return 0;
@@ -267,7 +267,8 @@ int Schedule_UI_Delete(int id) {
 	schedule_t rec;
 
 	if (!Schedule_Srv_FetchByID(id, &rec)) {
-		printf("\t\t\t剧目ID不存在!\n\t\t\t按 [Enter] 返回\n\t\t\t");
+		printf("\t\t\t\t剧目ID不存在!\t\t\t按 [Enter] 返回\n\t\t\t");
+		getchar();
 		getchar();
 		return 0;
 	}
@@ -307,6 +308,15 @@ int Schedule_UI_Delete(int id) {
 int Schedule_UI_Query(int id) {
 	int rtn = 1;
 	schedule_t  buf;
+	schedule_t rec;
+
+	if (!Schedule_Srv_FetchByID(id, &rec)) {
+		printf("\t\t\t\t剧目ID不存在!\t\t\t按 [Enter] 返回\n\t\t\t");
+		getchar();
+		getchar();
+		return 0;
+	}
+
 
 	if (Schedule_Srv_FetchByID(id, &buf)) {
 		system("cls");

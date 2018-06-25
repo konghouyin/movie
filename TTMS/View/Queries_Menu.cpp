@@ -21,7 +21,6 @@ void Queries_Menu(void) {
 		printf("\n\t\t\t\t\t\t   [S]场地查询\n");
 		printf("\n\t\t\t\t\t\t   [P]剧目查询\n");
 		printf("\n\t\t\t\t\t\t   [C]演出计划查询\n");
-		//printf("\n\t\t\t\t\t\t   [T]演出票查询\n");
 		printf("\n\t\t\t\t\t\t   [R]返回\n");
 		
 		printf("\n\t\t\t\t        ==========================================\n");
@@ -38,10 +37,6 @@ void Queries_Menu(void) {
 		case 'p':
 			Play_UI_MgtEntry(1);
 			break;
-		//case 'T':
-		//case 't': //Ticket_query;
-		//	Ticket_UI_MgtEntry();
-		//	break;
 		case 'C':
 		case 'c':
 			Schedule_UI_ListAll1();

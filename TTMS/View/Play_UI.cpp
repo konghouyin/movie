@@ -101,6 +101,8 @@ void  Play_UI_MgtEntry(int flag) {
 			case 'Q':
 				printf("\t\t\t\t请输入查询片名: ");
 				scanf("%s", name);
+
+
 				getchar();
 				if (Play_UI_Query_Name(name)) {	//从新载入数据
 					paging.totalRecords = Play_Srv_FetchAll(head);
@@ -462,10 +464,11 @@ int Play_UI_Query_Name(char* name)
 	Play_Srv_FetchAll(head);
 
 	if (rec=Play_Srv_FetchByName1(head, name),rec.id==0) {
-		printf("\t\t\t\t查询无果!\t\t\t按 [Enter] 返回\n\t\t\t");
+		printf("\t\t\t\t查询无果!\t\t\t\t按 [Enter] 返回\n\t\t\t");
 		getchar();
 		return 0;
 	}
+
 	//界面	
 	system("cls");
 	kuangjia();

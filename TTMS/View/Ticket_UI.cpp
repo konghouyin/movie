@@ -54,19 +54,19 @@ void Ticket_UI_show(int schID)
 		if (buf.row > rowmax)
 			rowmax = buf.row;
 		if (buf.column > colmax)
-			colmax = buf.row;
+			colmax = buf.column;
 	}
 
 	int i;
 	printf("\t\t\t\t\t%4c ", ' ');
-	for (i = 1; i <= rowmax; i++) {
+	for (i = 1; i <= colmax; i++) {
 		printf("%4d", i);
 	}
 	printf("\n\t\t\t\t------------------------------------------------------------------\n");
 	//显示数据
 	i = 1;
 	int j = 1;
-	for (; i <= colmax; i++ )
+	for (; i <= rowmax; i++ )
 	{
 		j = 1;
 		printf("\t\t\t\t\t%2d行: ", i);

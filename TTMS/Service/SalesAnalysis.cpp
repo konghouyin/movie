@@ -37,6 +37,28 @@ int Salesanalysis_Srv_CompSaleVal(int usrID, user_date_t stDate, user_date_t end
 	return amount;
 }
 
+//计算所有人员在给定时间区间的销售额，返回销售额
+int Salesanalysis_Srv_CompSaleVal_all(user_date_t stDate, user_date_t endDate) {
+	int amount = 0;
+	int i, j;
+	sale_list_t saleList;
+	sale_node_t *pos;
+
+	List_Init(saleList, sale_node_t);
+	/*根据id载入匹配的销售信息，构建saleList链表*/
+	Sale_Perst_SelectAll(saleList);
+	List_ForEach(saleList, pos)
+	{
+		i = DateCmp(pos->data.date, stDate);
+		j = DateCmp(endDate, pos->data.date);
+		if ( i != -1 && j != -1) {
+			amount = amount + pos->data.value;
+		}
+	}//修改完成
+	List_Destroy(saleList, sale_node_t);
+	return amount;
+}
+
 //结合剧目Play.dat,统计销售数据，构建销售分析salesanalysis_list_t list链表，返回list链表长度
 int Salesanalysis_Srv_StaticSale(salesanalysis_list_t list) {
 	int count = 0;

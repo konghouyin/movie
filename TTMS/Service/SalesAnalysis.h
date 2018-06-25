@@ -24,7 +24,8 @@ typedef struct salesanalysis_node {
 	struct salesanalysis_node *next, *prev;
 } salesanalysis_node_t, *salesanalysis_list_t;
 
-
+//计算所有人员在给定时间区间的销售额，返回销售额
+int Salesanalysis_Srv_CompSaleVal_all( user_date_t stDate, user_date_t endDate);
 
 //计算员工usrID在给定时间区间的销售额
 int Salesanalysis_Srv_CompSaleVal(int usrID, user_date_t stDate, user_date_t endDate);
