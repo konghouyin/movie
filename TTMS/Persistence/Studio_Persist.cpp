@@ -15,7 +15,6 @@ int Studio_Perst_Insert(const studio_t *data) {
 	FILE *fp = fopen(STUDIO_DATA_FILE, "ab");//文件后方续写
 	int rtn = 0;
 	if (NULL == fp) {
-		printf("Cannot open file %s!\n", STUDIO_DATA_FILE);
 		return 0;
 	}
 	rtn = fwrite(data, sizeof(studio_t), 1, fp);
@@ -29,7 +28,6 @@ int Studio_Perst_Update(const studio_t * data) {
 
 	FILE *fp = fopen(STUDIO_DATA_FILE, "rb+");
 	if (NULL == fp) {
-		printf("Cannot open file %s!\n", STUDIO_DATA_FILE);
 		return 0;
 	}
 
@@ -58,20 +56,17 @@ int Studio_Perst_DeleteByID(int ID) {
 
 	//对原始数据文件重命名
 	if (rename(STUDIO_DATA_FILE, STUDIO_DATA_TEMP_FILE)<0) {
-		printf("Cannot open file %s!\n", STUDIO_DATA_FILE);
 		return 0;
 	}
 
 	FILE *fpSour, *fpTarg;
 	fpSour = fopen(STUDIO_DATA_TEMP_FILE, "rb");
 	if (NULL == fpSour) {
-		printf("Cannot open file %s!\n", STUDIO_DATA_FILE);
 		return 0;
 	}
 
 	fpTarg = fopen(STUDIO_DATA_FILE, "wb");
 	if (NULL == fpTarg) {
-		printf("Cannot open file %s!\n", STUDIO_DATA_TEMP_FILE);
 		return 0;
 	}
 

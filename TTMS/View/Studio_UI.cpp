@@ -165,6 +165,77 @@ void Studio_UI_MgtEntry(account_type_t type) {
 	List_Destroy(head, studio_node_t);
 }
 
+
+int Studio_UI_MgtEntry_schedule(void) {
+	int i;
+	char choice;
+
+	studio_list_t head;
+	studio_node_t *pos;
+	Pagination_t paging;
+	List_Init(head, studio_node_t);
+	paging.offset = 0;
+	paging.pageSize = 1;
+	//载入数据
+	paging.totalRecords = Studio_Srv_FetchAll(head);//统计一共有多少演出厅，并创建链表
+	Paging_Locate_FirstPage(head, paging);//定位到翻页器的第一页
+										  //翻页器没有再新建列表，只是通过相关操作，定位到需要打印信息的地址
+
+	do {
+
+		for (i = 0, pos = (studio_node_t *)(paging.curPos);
+			pos != head && i < paging.pageSize; i++)//for循环打印当前页（初始化计数器，先获取需要打印第一个信息的地址；终止条件：循环链表碰到开头，或打印个数与最大值相等；递增i）
+		{
+			goto_xy(35, 13);
+			printf("ID：%d                  ", pos->data.id);
+			goto_xy(35, 15);
+			printf("房间名称：%s            ", pos->data.name);
+			goto_xy(35, 17);
+			printf("行数：%d                ", pos->data.rowsCount);
+			goto_xy(35, 19);
+			printf("列数：%d                ", pos->data.colsCount);
+			goto_xy(35, 21);
+			printf("座位数：%d              ", pos->data.seatsCount);
+			pos = pos->next;
+		}
+		printf("\n\n\t\t         --- 场地总数:%2d ------ 位置 %2d/%2d ----\n",
+			paging.totalRecords, Pageing_CurPage(paging), Pageing_TotalPages(paging));
+		printf("\t\t      ********************************************** \n");
+		printf("\t\t        [P]上一个 [N]下一个 | [Y]确认 [W]手动输入");
+		printf("\n\t\t     ===============================================\n");
+		//打印翻页信息
+		while (_kbhit())
+		{
+			getch();
+		}
+		choice = getch();
+		switch (choice)
+		{
+		case 'p':
+		case 'P':
+			if (1 < Pageing_CurPage(paging)) {
+				Paging_Locate_OffsetPage(head, paging, -1, studio_node_t);
+			}
+			break;
+		case 'n':
+		case 'N':
+			if (Pageing_TotalPages(paging) > Pageing_CurPage(paging)) {
+				Paging_Locate_OffsetPage(head, paging, 1, studio_node_t);
+			}
+			break;
+		case 'y':
+		case 'Y':
+			return pos->prev->data.id;
+		case 'w':
+		case 'W':
+			return 0;
+		}
+	} while (1);
+
+
+	List_Destroy(head, studio_node_t);
+}
+
 int Studio_UI_Add(void) {
 	studio_t rec;
 	int newRecCount = 0;

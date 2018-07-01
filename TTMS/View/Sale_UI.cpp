@@ -78,7 +78,7 @@ void Sale_UI_ShowTicket(int schID)
 				if (s->data.seat_id == buf->data.id)
 				{
 					flag = 1;
-					if (!Sale_UI_SellTicket(buf->data.id))
+					if (!Sale_UI_SellTicket(s->data.id))
 					{
 						printf("购票失败！");
 					}
@@ -221,7 +221,7 @@ void Ticket_Info(ticket_t *data,int id)
 		printf("\t\t\t\t\t放映时间: %2d时%02d分%02d秒\n", p.time.hour, p.time.minute, p.time.second);
 		printf("\t\t\t\t\t票价：%d 元\n", buf.price);
 		printf("\t\t\t\t\t演出厅:%s\n", studio.name);
-		printf("\t\t\t\t\t位置: %d行%d列\n", s.row + 1, s.column + 1);
+		printf("\t\t\t\t\t位置: %d行%d列\n", s.row , s.column );
 		printf("\t\t\t\t==================================================\n");
 
 		getchar();
@@ -259,7 +259,7 @@ void Sale_UI_ShowScheduler(int playID)
 			goto_xy(0, 21);
 			printf("\t\t\t\t       ----总记录数:%2d ------------------- 页数： %2d/%2d ---- \n", paging.totalRecords, Pageing_CurPage(paging), Pageing_TotalPages(paging));
 			printf("\t\t\t\t    ===========================================================\n");
-			printf("\t\t\t\t    ** [P]上一页 [N]下一页 [R]返回 [S]售票系统  **\n");
+			printf("\t\t\t\t         ** [P]上一页 [N]下一页 [R]返回 [S]售票系统  **\n");
 			printf("\t\t\t\t    ===========================================================\n");
 			printf("\t\t\t\t\t请选择：");
 			while (_kbhit()){getch();}

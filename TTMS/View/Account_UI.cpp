@@ -74,25 +74,41 @@ int GetPassword(char password[])
 	password[i] = '\0';
 	return i;
 }
-
+void pt_one(int x, int y)
+{
+	goto_xy(x, y);
+	printf(" ---------------------");
+	goto_xy(x, y + 1);
+	printf("|");
+	goto_xy(x + 19, y + 1);
+	printf("   |");
+	goto_xy(x, y + 2);
+	printf(" ---------------------");
+}
+//打印单线框框
 
 #define TRY_TIME 4
 //登录函数，提示用户输入用户名和密码，登录成功return 1，否则提示重新登录，超过3次，登录失败
 int SysLogin() {
-
-
-	Account_Srv_InitSys();
 	char usrname[20];
 	char passwd[20];
 	int i = 0, j;
-	system("cls");
+	dbgwb:system("cls");
 	kuangjia();
 	goto_xy(30, 6);
 	printf("       ------->>            请登录           <<------\n");
 	goto_xy(30, 7);
 	printf("==============================================================\n");
 	for (i = 1; i <= TRY_TIME; i++) {
-		printf("\t\t\t\t******** 请输入你的用户名: ");
+		goto_xy(45, 11);
+		printf("账号：");
+		pt_one(51, 10);
+		goto_xy(45, 15);
+		printf("密码：");
+		pt_one(51, 14);
+		printf("\n\n\t\t\t\t==========================================================\n");
+
+		goto_xy(52, 11);
 		while (_kbhit())
 		{
 			getch();
@@ -100,13 +116,15 @@ int SysLogin() {
 		fgets(usrname, 19, stdin);
 		int l = strlen(usrname);
 		usrname[l - 1] = '\0';
-		printf("\t\t\t\t******** 请输入你的密码: ");
+		goto_xy(52, 15);
 		GetPassword(passwd);
-		printf("\n\t\t\t\t==========================================================\n");
+
+		
 
 		//验证登录账号是否已存在，存在，保存登录用户信息到全局变量gl_CurUser，return 1；否则return 0
 		if (Account_Srv_Verify(usrname, passwd))
 		{
+			goto_xy(0, 19);
 			printf("\t\t\t\t\t    ");
 			for (j = 0; j < 11; j++)
 			{
@@ -122,6 +140,7 @@ int SysLogin() {
 		}
 		else
 		{
+			goto_xy(0, 19);
 			printf("\t\t\t\t\t    ");
 			for (j = 0; j < 11; j++)
 			{
@@ -131,18 +150,11 @@ int SysLogin() {
 			printf("\n");
 			for (int o = i*10-5; o >=0; o--)
 			{
-				goto_xy(0, 13);
+				goto_xy(0, 21);
 				printf("\t\t\t\t身份验证错误!!!   还有%d次机会   请%d秒后重试----还剩%d秒\n", 4 - i, i * 10 - 5, o);
 				Sleep(1000);
 			}			
-			goto_xy(0, 8);
-			printf("\t\t\t                                                                                            \n");
-			printf("\t\t\t                                                                                            \n");
-			printf("\t\t\t                                                                                            \n");
-			printf("\t\t\t                                                                                            \n");
-			printf("\t\t\t                                                                                            \n");
-			printf("\t\t\t                                                                                            \n");
-			goto_xy(0, 8);
+			goto dbgwb;
 		}
 	}
 }

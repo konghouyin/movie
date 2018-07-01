@@ -18,7 +18,6 @@ int Ticket_Perst_Insert(ticket_list_t list) {
 
 	FILE *fp = fopen(TICKET_DATA_FILE, "ab");
 	if (NULL == fp) {
-		printf("Cannot open file %s!\n", TICKET_DATA_FILE);
 		return 0;
 	}
 	pos = list->next;
@@ -39,7 +38,6 @@ int Ticket_Perst_Delete(int schedule_id) {
 	fpSour = fopen(TICKET_DATA_TEMP_FILE, "rb");
 	fpTarg = fopen(TICKET_DATA_FILE, "wb");
 	if (NULL == fpTarg || NULL == fpSour) {
-		printf("Cannot open file %s!\n", TICKET_DATA_FILE);
 		return 0;
 	}
 
@@ -70,7 +68,6 @@ int Ticket_Perst_Update(const ticket_t * data) {
 
 	FILE *fp = fopen(TICKET_DATA_FILE, "rb+");
 	if (NULL == fp) {
-		printf("Cannot open file %s!\n", TICKET_DATA_FILE);
 		return 0;
 	}
 
@@ -99,7 +96,6 @@ int Ticket_Perst_SelectByID(int ID, ticket_t *buf) {
 
 	FILE *fp = fopen(TICKET_DATA_FILE, "rb");
 	if (NULL == fp) {
-		printf("Cannot open file %s!\n", TICKET_DATA_FILE);
 		return 0;
 	}
 
@@ -136,7 +132,6 @@ int Ticket_Perst_SelectAll(ticket_list_t list) {
 
 	FILE *fp = fopen(TICKET_DATA_FILE, "rb");
 	if (NULL == fp) { //文件不存在
-		printf("Cannot open file %s!\n", TICKET_DATA_FILE);
 		return 0;
 	}
 
@@ -173,7 +168,6 @@ int Ticket_Perst_SelectBySchID(ticket_list_t list, int schedule_id) {
 
 	FILE *fp = fopen(TICKET_DATA_FILE, "rb");
 	if (NULL == fp) { //文件不存在
-		printf("Cannot open file %s!\n", TICKET_DATA_FILE);
 		return 0;
 	}
 
@@ -207,7 +201,6 @@ int Ticket_Perst_SelectByKeyList(ticket_list_t list, entkey_list_t keyList) {
 
 	FILE *fp = fopen(TICKET_DATA_FILE, "rb");
 	if (NULL == fp) { //文件不存在
-		printf("Cannot open file %s!\n", TICKET_DATA_FILE);
 		return 0;
 	}
 

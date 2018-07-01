@@ -39,6 +39,7 @@ void Main_Menu(account_t usr)//传入的内容类型，作为打印不同菜单的依据
 			printf("\n\t\t\t\t\t\t   [E]退出\n");
 			printf("\n\t\t\t\t        ==========================================\n");
 			printf("\t\t\t\t\t请输入你的选择: ");
+			char choose;
 			choice = getche();
 			switch (choice) {
 			case 'A':
@@ -57,8 +58,14 @@ void Main_Menu(account_t usr)//传入的内容类型，作为打印不同菜单的依据
 			case 'n':
 				SalesAanalysis_UI_MgtEntry();
 				break;
+			case 'e':
+			case 'E':
+				printf("        是否确认退出登录--Y/N--");
+				choose = getche();
+				if (choose == 'Y' || choose == 'y')
+					return;
 			}
-		} while ('E' != choice && 'e' != choice);
+		} while (1);
 
 		break;
 	case 2:
@@ -78,10 +85,9 @@ void Main_Menu(account_t usr)//传入的内容类型，作为打印不同菜单的依据
 			printf("\n\t\t\t\t\t\t   [N]销售统计与分析\n");
 			printf("\n\t\t\t\t\t\t   [A]修改密码\n");
 			printf("\n\t\t\t\t\t\t   [E]退出\n");
-
-
 			printf("\n\t\t\t\t        ==========================================\n");
 			printf("\t\t\t\t\t请输入你的选择: ");
+			char choose;
 			choice = getche();
 			switch (choice) {
 			case 'A':
@@ -101,8 +107,14 @@ void Main_Menu(account_t usr)//传入的内容类型，作为打印不同菜单的依据
 			case 'n':
 				SalesAanalysis_UI_MgtEntry();
 				break;
+			case 'e':
+			case 'E':
+				printf("        是否确认退出登录--Y/N--");
+				choose = getche();
+				if (choose == 'Y' || choose == 'y')
+					return;
 			}
-		} while ('E' != choice && 'e' != choice);
+		} while (1);
 		break;
 	case 9:
 		do {
@@ -121,6 +133,7 @@ void Main_Menu(account_t usr)//传入的内容类型，作为打印不同菜单的依据
 			printf("\n\t\t\t\t\t\t   [E] 退出\n");
 			printf("\n\t\t\t\t        ==========================================\n");
 			printf("\t\t\t\t\t请输入你的选择:");
+			char choose;
 			choice = getche();
 			switch (choice) {
 			case 'S':
@@ -131,8 +144,14 @@ void Main_Menu(account_t usr)//传入的内容类型，作为打印不同菜单的依据
 			case 'a':
 				Account_UI_MgtEntry();
 				break;
+			case 'e':
+			case 'E':
+				printf("        是否确认退出登录--Y/N--");
+				choose = getche();
+				if (choose == 'Y' || choose == 'y')
+					return;
 			}
-		} while ('E' != choice && 'e' != choice);
+		} while (1);
 		break;
 	case 0:
 	default:
@@ -147,6 +166,7 @@ void Main_Menu(account_t usr)//传入的内容类型，作为打印不同菜单的依据
 			printf("\t\t\t[E]退出\n");
 			printf("\n\t\t\t==================================================================\n");
 			printf("\t\t\t请输入你的选择:");
+			char choose;
 			choice = getche();
 			switch (choice) {
 			case 'Q':
@@ -157,8 +177,14 @@ void Main_Menu(account_t usr)//传入的内容类型，作为打印不同菜单的依据
 			case 'p':
 				Play_UI_MgtEntry(1);
 				break;
+			case 'e':
+			case 'E':
+				printf("        是否确认退出登录--Y/N--");
+				choose = getche();
+				if (choose == 'Y' || choose == 'y')
+					return;
 			}
-		} while ('E' != choice && 'e' != choice);
+		} while (1);
 		break;
 	}
 	printf("\n\t\t\t");

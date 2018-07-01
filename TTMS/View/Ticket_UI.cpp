@@ -70,7 +70,7 @@ void Ticket_UI_show(int schID)
 	{
 		j = 1;
 		printf("\t\t\t\t\t%2dÐÐ: ", i);
-		for (; j <= rowmax; j++)
+		for (; j <= colmax; j++)
 		{
 			printf("%4s", listout[i][j]);
 		}

@@ -26,7 +26,6 @@ int Schedule_Perst_Insert(const schedule_t *data) {
 	FILE *fp = fopen(SCHEDULE_DATA_FILE, "ab");
 	int rtn = 0;
 	if (NULL == fp) {
-		printf("Cannot open file %s!\n", SCHEDULE_DATA_FILE);
 		return 0;
 	}
 	rtn = fwrite(data, sizeof(schedule_t), 1, fp);//调用成功，返回count的值，如果不成功，返回0；
@@ -46,7 +45,6 @@ int Schedule_Perst_Update(const schedule_t *data) {
 	assert(NULL != data);
 	FILE *fp = fopen(SCHEDULE_DATA_FILE, "rb+");
 	if (NULL == fp) {
-		printf("Cannot open file %s!\n", SCHEDULE_DATA_FILE);
 		return 0;
 	}
 	schedule_t buf;
@@ -83,13 +81,11 @@ int Schedule_Perst_DeleteByID(int ID) {
 	FILE *fpSour, *fpTarg;
 	fpSour = fopen(SCHEDULE_DATA_TEMP_FILE, "rb");
 	if (NULL == fpSour) {
-		printf("Cannot open file %s!\n", SCHEDULE_DATA_FILE);
 		return 0;
 	}
 
 	fpTarg = fopen(SCHEDULE_DATA_FILE, "wb");
 	if (NULL == fpTarg) {
-		printf("Cannot open file %s!\n", SCHEDULE_DATA_TEMP_FILE);
 		return 0;
 	}
 
@@ -231,20 +227,17 @@ int Schedule_Perst_DeleteByPlay(schedule_list_t list, int play_id)
 	//将原始文件重命名，然后读取数据重新写入到数据文件中，并将要删除的实体过滤掉。（借用另一个文件）
 	//对原始数据文件重命名
 	if (rename(SCHEDULE_DATA_FILE, SCHEDULE_DATA_TEMP_FILE)<0) {
-		printf("Cannot open file %s!\n", SCHEDULE_DATA_FILE);
 		return 0;
 	}
 
 	FILE *fpSour, *fpTarg;
 	fpSour = fopen(SCHEDULE_DATA_TEMP_FILE, "rb");
 	if (NULL == fpSour) {
-		printf("Cannot open file %s!\n", SCHEDULE_DATA_FILE);
 		return 0;
 	}
 
 	fpTarg = fopen(SCHEDULE_DATA_FILE, "wb");
 	if (NULL == fpTarg) {
-		printf("Cannot open file %s!\n", SCHEDULE_DATA_TEMP_FILE);
 		return 0;
 	}
 

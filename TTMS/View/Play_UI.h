@@ -81,4 +81,9 @@ char *type(int type);
 
 char *rating(int rating);
 
+
+int Play_UI_MgtEntry_schedule(void);
+
+int Play_UI_ShowList_schedule(play_list_t list, Pagination_t paging);
+
 #endif /* PLAY_UI_H_ */

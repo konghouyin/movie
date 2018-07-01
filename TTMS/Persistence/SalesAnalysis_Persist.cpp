@@ -25,7 +25,6 @@ int Salesanalysis_Perst_Insert(const salesanalysis_t *data) {
 	FILE *fp = fopen(SALESANALYSIS_DATA_FILE, "ab");
 	int rtn = 0;
 	if (NULL == fp) {
-		printf("Cannot open file %s!\n", SALESANALYSIS_DATA_FILE);
 		return 0;
 	}
 	rtn = fwrite(data, sizeof(salesanalysis_t), 1, fp);

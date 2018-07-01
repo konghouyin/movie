@@ -56,9 +56,10 @@ int Seat_Srv_FetchValidByRoomID(seat_list_t list, int roomID)
 	List_ForEach(list, p) {
 		if (p->data.status != SEAT_GOOD)
 		{
-			p1 = p->next;
-			List_FreeNode(p);
-			p = p1;
+			//p1 = p->next;
+			List_DelNode(p);
+			/*List_FreeNode(p);*/
+			//p = p1;
 			SeatCount--;
 		}
 	}

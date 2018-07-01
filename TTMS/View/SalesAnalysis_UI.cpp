@@ -58,14 +58,14 @@ void SalesAnalysis_UI_BoxOffice() {
 		for (i = 0, pos = head->next;
 			pos != head && i < paging.pageSize; i++)
 		{
-			printf("\t\t\t    %8d  %12s          %3d     %2d  %8ld\n", icount, pos->data.name,pos->data.price,pos->data.totaltickets, pos->data.sales);
+			printf("\t\t\t    %8d  %12s          %3d     %2d  %8ld\n\n", icount, pos->data.name,pos->data.price,pos->data.sales/pos->data.price, pos->data.sales);
 			pos = pos->next;
 			icount++;
 		}
 		goto_xy(0, 21);
 		printf("\t\t             ----- 剧目总数 :%2d ---------------- 页码： %2d/%2d -----    \n", paging.totalRecords, Pageing_CurPage(paging), Pageing_TotalPages(paging));
 		printf("\t\t\t    = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =\n");
-		printf("\t\t\t              [P] 上一页      [N] 下一页      [R] 返回 \n");
+		printf("\t\t\t              [P] 上一页      [N] 下一页      [R] 返回 ");
 		printf("\n\t\t\t    ==================================================================\n");
 		printf("\t\t\t    请输入您的选择：");
 		while (_kbhit()){getch();}
@@ -114,7 +114,7 @@ void SalesAnalysis_UI_StatSale_all(user_date_t stDate, user_date_t endDate) {
 	printf("\t\t\t\t       ***************  日期销售情况  *****************\n");
 	printf("\t\t\t\t    ========================================================\n");
 	printf("\t\t\t\t             查询时间                            销售额\n\n");
-	printf("\t\t\t\t    %d年%d月%d日--%d年%d月%d日                %d\n", stDate.year,stDate.month,stDate.day,endDate.year,endDate.month,endDate.day,rtn);
+	printf("\t\t\t\t    %d年%d月%d日--%d年%d月%d日                     %d\n", stDate.year,stDate.month,stDate.day,endDate.year,endDate.month,endDate.day,rtn);
 	printf("\t\t\t\t    --------------------------------------------------------\n");
 	printf("\t\t\t\t\t按[Enter]键返回");
 	getchar();

@@ -58,7 +58,6 @@ int Account_Perst_Insert(const account_t *data) {
 	FILE *fp = fopen(ACCOUNT_DATA_FILE, "ab");
 	int rtn = 0;
 	if (NULL == fp) {
-		printf("Cannot open file %s!\n", ACCOUNT_DATA_FILE);
 		return 0;
 	}
 	rtn = fwrite(data, sizeof(account_t), 1, fp);//fwrite的返回值为成功存入的个数
@@ -72,7 +71,6 @@ int Account_Perst_Update(const account_t * data) {
 
 	FILE *fp = fopen(ACCOUNT_DATA_FILE, "rb+");
 	if (NULL == fp) {
-		printf("Cannot open file %s!\n", ACCOUNT_DATA_FILE);
 		return 0;
 	}
 
@@ -99,20 +97,17 @@ int Account_Perst_DeleteByID(int id) {
 
 	//对原始数据文件重命名
 	if (rename(ACCOUNT_DATA_FILE, ACCOUNT_DATA_TEMP_FILE)<0) {
-		printf("Cannot open file %s!\n", ACCOUNT_DATA_FILE);
 		return 0;
 	}
 
 	FILE *fpSour, *fpTarg;
 	fpSour = fopen(ACCOUNT_DATA_TEMP_FILE, "rb");
 	if (NULL == fpSour) {
-		printf("Cannot open file %s!\n", ACCOUNT_DATA_FILE);
 		return 0;
 	}
 
 	fpTarg = fopen(ACCOUNT_DATA_FILE, "wb");
 	if (NULL == fpTarg) {
-		printf("Cannot open file %s!\n", ACCOUNT_DATA_TEMP_FILE);
 		return 0;
 	}
 	account_t buf;

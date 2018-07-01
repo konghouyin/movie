@@ -18,6 +18,7 @@
 #include "../Service/Seat.h"
 #include "../Service/Ticket.h"
 #include "../Common/window.h"
+#include "Studio_UI.h"
 
 #include "conio.h"
 #include <stdio.h>
@@ -51,7 +52,7 @@ void Schedule_UI_ListAll(void) {
 	//显示数据
 	for (i = 0, pos = (schedule_node_t *)(paging.curPos);
 		pos != head && i < paging.pageSize; i++) {
-		printf("\t\t\t%5d %8d %8d    %8d年%02d月%02d日   %8d时%02d分%02d秒  %3d\n\n", pos->data.id,
+		printf("\t\t\t%5d %8d %8d        %8d年%02d月%02d日     %2d时%02d分%02d秒  %3d\n\n", pos->data.id,
 			pos->data.play_id, pos->data.studio_id, pos->data.date.year, pos->data.date.month, pos->data.date.day,
 			pos->data.time.hour, pos->data.time.minute, pos->data.time.second, pos->data.seat_count);
 		pos = pos->next;
@@ -91,7 +92,7 @@ void Schedule_UI_ListAll1(void)
 		//显示数据
 		for (i = 0, pos = (schedule_node_t *)(paging.curPos);
 			pos != head && i < paging.pageSize; i++) {
-			printf("\t\t\t%5d %8d %8d    %8d年%02d月%02d日   %8d时%02d分%02d秒  %3d\n\n", pos->data.id,
+			printf("\t\t\t%5d %8d %8d       %8d年%02d月%02d日     %2d时%02d分%02d秒  %3d\n\n", pos->data.id,
 				pos->data.play_id, pos->data.studio_id, pos->data.date.year, pos->data.date.month, pos->data.date.day,
 				pos->data.time.hour, pos->data.time.minute, pos->data.time.second, pos->data.seat_count);
 			pos = pos->next;
@@ -161,21 +162,55 @@ int Schedule_UI_Add(void) {
 		kuangjia();
 		goto_xy(30, 7);
 		printf("              ---->>    增加演出计划    <<----\n");
-		goto_xy(30, 8);
-		printf("\t       ==============================================\n");
+		goto_xy(20, 8);
+		printf("==================================================================================\n");
+		goto_xy(20, 28);
+		printf("==================================================================================\n");
+		int flag1, flag2;
+		for (int t = 10; t < 27; t++) {
+			goto_xy(72, t);
+			printf("*");
+		}
 
 		while (_kbhit()){getch();}
-		printf("\n\t\t\t\t\t\t剧目 ID: ");
-		scanf("%d", &rec.play_id);
-		printf("\n\t\t\t\t\t\t演出厅 ID: ");
-		scanf("%d", &rec.studio_id);
-		printf("\n\t\t\t\t\t\t播放日期: ");
+		goto_xy(0, 10);
+		printf("\n\t\t\t\t\t\t\t\t\t\t剧目 ID: ");
+		flag1 = Play_UI_MgtEntry_schedule();
+		if (flag1 == 0)
+		{
+			goto_xy(90, 11);
+			scanf("%d", &rec.play_id);
+		}
+		else
+		{
+			goto_xy(90, 11);
+			printf("%d", flag1);
+			rec.play_id = flag1;
+		}
+			
+
+		goto_xy(0, 12);
+		printf("\n\t\t\t\t\t\t\t\t\t\t演出厅 ID: ");
+		flag2 = Studio_UI_MgtEntry_schedule();
+		if (flag2 == 0)
+		{
+			goto_xy(91, 13);
+			scanf("%d", &rec.studio_id);
+		}
+		else
+		{
+			goto_xy(91, 13);
+			printf("%d", flag2);
+			rec.studio_id = flag2;
+		}
+		goto_xy(0, 14);
+		printf("\n\t\t\t\t\t\t\t\t\t\t播放日期: ");
 		scanf("%d%d%d", &rec.date.year, &rec.date.month, &rec.date.day);
-		printf("\n\t\t\t\t\t\t播放时间: ");
+		printf("\n\t\t\t\t\t\t\t\t\t\t播放时间: ");
 		scanf("%d%d%d", &rec.time.hour, &rec.time.minute, &rec.time.second);
 		getchar();
 
-		printf("\n\t\t\t\t        ==========================================\n");
+	
 
 		//获取主键
 		char type[] = "Schedule";
@@ -184,14 +219,18 @@ int Schedule_UI_Add(void) {
 
 		if (Schedule_Srv_Add(&rec) && Ticket_Srv_AddBatch(rec.id, rec.studio_id)) {
 			newRecCount += 1;
-			printf("\t\t\t\t\t\t新演出计划添加成功!\n");
+			goto_xy(80, 20);
+			printf("新演出计划添加成功!\n");
 		}
 		else {
-			printf("\t\t\t\t\t演出计划添加失败!\n");
+			goto_xy(80, 20);
+			printf("演出计划添加失败!\n");
 			Schedule_Srv_DeleteByID(rec.id);
 		}
-		printf("\t\t\t\t-------------------------------------------------------\n");
-		printf("\t\t\t\t\t     [A]继续添加            [R]返回:");
+		goto_xy(77, 21);
+		printf("-------------------------\n");
+		goto_xy(77, 22);
+		printf("  [A]继续添加       [R]返回:");
 		while (_kbhit()){getch();}
 		choice = getche();
 	} while ('a' == choice || 'A' == choice);

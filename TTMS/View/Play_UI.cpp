@@ -206,6 +206,86 @@ void  Play_UI_MgtEntry(int flag) {
 	}
 }
 
+int Play_UI_ShowList_schedule(play_list_t list, Pagination_t paging) {
+	int i;
+	play_node_t *pos;
+
+
+	goto_xy(25, 11);
+	printf("    ---->>     备选列表    <<----\n");
+
+
+	for (i = 0, pos = (play_node_t *)(paging.curPos); pos != list && i < paging.pageSize; i++)
+	{
+		goto_xy(35, 13);
+		printf("片名：%s         ", pos->data.name);
+		goto_xy(35, 15);
+		printf("种类：%s         ", type(pos->data.type));
+		goto_xy(35, 17);
+		printf("等级：%s         ", rating(pos->data.rating));
+		goto_xy(35, 19);
+		printf("时长：%d分钟      ", pos->data.duration);
+		goto_xy(35, 21);
+		printf("价格：%d元        ", pos->data.price);
+		pos = pos->next;
+	}
+	return pos->prev->data.id;
+
+}
+
+int Play_UI_MgtEntry_schedule(void) {
+	int i, id;
+	char choice;
+	play_list_t head;
+	play_node_t *pos;
+	Pagination_t paging;
+	List_Init(head, play_node_t);
+	paging.offset = 0;
+	paging.pageSize = PLAY_PAGE_SIZE;
+	//载入数据
+	paging.totalRecords = Play_Srv_FetchAll(head);
+	Paging_Locate_FirstPage(head, paging);
+
+		do {
+
+			id=Play_UI_ShowList_schedule(head, paging);
+			printf("\n\n\t\t         --- 剧目总数:%2d ------ 位置 %2d/%2d ----\n",
+				paging.totalRecords, Pageing_CurPage(paging), Pageing_TotalPages(paging));
+			printf("\t\t      ********************************************** \n");
+			printf("\t\t        [P]上一个 [N]下一个 | [Y]确认 [W]手动输入");
+			printf("\n\t\t     ===============================================\n");
+
+			choice = getch();
+			char name[30];
+			switch (choice)
+			{
+				break;
+			case 'p':
+			case 'P':
+				if (1 < Pageing_CurPage(paging)) {
+					Paging_Locate_OffsetPage(head, paging, -1, play_node_t);
+				}
+				break;
+
+			case 'n':
+			case 'N':
+				if (Pageing_TotalPages(paging) > Pageing_CurPage(paging)) {
+					Paging_Locate_OffsetPage(head, paging, 1, play_node_t);
+				}
+				break;
+			case 'y':
+			case 'Y':
+				return id;
+			case 'w':
+			case 'W':
+				return 0;
+			}
+		} while (1);
+	
+
+}
+//为演出计划添加提供数据
+
 
 /*
 * Function:    Play_UI_Add
@@ -326,7 +406,7 @@ int Play_UI_Modify(int id) {
 	printf("\n\t\t\t\t\t剧目分级:（1--儿童，2--青少年，3--成人）");
 	scanf("%d", &rec.rating);//演出级别类型定义，1表示儿童可观看，2表示青少年可观看，3表示成人可观看
 
-	printf("\n\t\t\t\t\t播放时间: ");
+	printf("\n\t\t\t\t\t播放时间（单位-分钟）: ");
 	scanf("%d", &rec.duration);
 
 	printf("\n\t\t\t\t\t上架日期 (年 月 日): ");
@@ -335,7 +415,7 @@ int Play_UI_Modify(int id) {
 	printf("\n\t\t\t\t\t下架日期 (年 月 日): ");
 	scanf("%d%d%d", &rec.end_date.year, &rec.end_date.month, &rec.end_date.day);
 
-	printf("\n\t\t\t\t\t剧目票价: ");
+	printf("\n\t\t\t\t\t剧目票价（元）: ");
 	scanf("%d", &rec.price);
 
 	getchar();

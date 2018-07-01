@@ -22,7 +22,6 @@ int Seat_Perst_Insert(const seat_t *data) {
 	int rtn = 0;
 
 	if (NULL == fp) {
-		printf("Cannot open file %s!\n", SEAT_DATA_FILE);
 		return 0;
 	}
 
@@ -40,7 +39,6 @@ int Seat_Perst_InsertBatch(seat_list_t list) {
 	int rtn = 0;
 
 	if (NULL == fp) {
-		printf("Cannot open file %s!\n", SEAT_DATA_FILE);
 		return 0;
 	}
 
@@ -59,7 +57,6 @@ int Seat_Perst_Update(const seat_t *seatdata) {
 
 	FILE *fp = fopen(SEAT_DATA_FILE, "rb+");
 	if (NULL == fp) {
-		printf("Cannot open file %s!\n", SEAT_DATA_FILE);
 		return 0;
 	}
 
@@ -87,7 +84,6 @@ int Seat_Perst_DeleteByID(int ID) {
 
 	//对原始数据文件重命名
 	if (rename(SEAT_DATA_FILE, SEAT_DATA_TEMP_FILE) < 0) {
-		printf("Cannot open file %s!\n", SEAT_DATA_FILE);
 		return 0;
 	}
 
@@ -95,11 +91,9 @@ int Seat_Perst_DeleteByID(int ID) {
 	fpTarg = fopen(SEAT_DATA_FILE, "wb");
 
 	if (NULL == fpTarg) {
-		printf("Cannot open file %s!\n", SEAT_DATA_FILE);
 		return 0;
 	}
 	if (NULL == fpSour) {
-		printf("Cannot open file %s!\n", SEAT_DATA_TEMP_FILE);
 		return 0;
 	}
 
@@ -132,7 +126,6 @@ int Seat_Perst_DeleteAllByRoomID(int roomID) {
 
 	//对原始数据文件重命名
 	if (rename(SEAT_DATA_FILE, SEAT_DATA_TEMP_FILE) < 0) {
-		printf("Cannot open file %s!\n", SEAT_DATA_FILE);
 		return 0;
 	}
 
@@ -140,11 +133,9 @@ int Seat_Perst_DeleteAllByRoomID(int roomID) {
 	fpTarg = fopen(SEAT_DATA_FILE, "wb");
 
 	if (NULL == fpTarg) {
-		printf("Cannot open file %s!\n", SEAT_DATA_FILE);
 		return 0;
 	}
 	if (NULL == fpSour) {
-		printf("Cannot open file %s!\n", SEAT_DATA_TEMP_FILE);
 		return 0;
 	}
 

@@ -15,7 +15,7 @@ typedef struct {
 	int roomID;				//所在演出厅id
 	int row;           		//座位行号
 	int column;        	    //座位列号
-	seat_status_t status;	//座位在该行的状态，0表示没有座位，1表示有座位。扩展2可表示座位坏了
+	seat_status_t status;	//座位在该行的状态，0表示没有座位，1表示有座位。
 } seat_t;
 
 

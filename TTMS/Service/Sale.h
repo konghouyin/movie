@@ -13,7 +13,7 @@ typedef enum {
 	SALE_RETURN = -1	//退票
 }sale_type_t;
 
-// 用来统计的信息 ， 显示售票情况的。 如在某个时间段内售出多少票 ， 或者某个ticket_id , 这个要插到我的模块中去 ， 在买票的时候进行记录 。
+// 用来统计的信息 ， 显示售票情况的。 如在某个时间段内售出多少票 ， 或者某个ticket_id , 在买票的时候进行记录 。
 typedef struct {
 	long id;      		//销售记录ID
 	int user_id;		//售票员ID
