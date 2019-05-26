@@ -1,0 +1,27 @@
+<!--pages/main/main.wxml-->
+<view class='back-image'></view>
+<view class="wrap">
+    <view class='movie-message'>
+        <image class="movie-hb" src="{{item.pic}}"></image>
+        <view class='message'>
+            <view class="movie-name">{{item.name}}</view>
+            <view class="movie-type">{{item.type}}</view>
+            <view class="movie-time">{{item.country+' / '+item.time}}</view>
+            <view class="movie-actor">演员： {{item.actor}}</view>
+            <view class="movie-style">{{item.style}}</view>
+        </view>
+    </view>
+</view>
+<view class="part">
+    <text class="title">简介</text>
+    <text class="{{synopsised}} index-message" decode="{{true}}">&nbsp;&nbsp;&nbsp;&nbsp;{{item.synopsis}}</text>
+</view>
+<view class="part">
+<text class="title">演职人员</text>
+</view>
+<view class="part">
+<text class="title">视频和剧照</text>
+</view>
+<view class="part">
+<text class="title">评论</text>
+</view>
