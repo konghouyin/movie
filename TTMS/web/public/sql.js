@@ -1,4 +1,4 @@
-var mysql = require('mysql');
+const mysql = require('mysql');
 
 module.exports = {
 
@@ -7,26 +7,26 @@ module.exports = {
 	},
 	//构架数据库连接池
 
-
-	sever: function(pool, sqlString, fn) {
-		console.log(sqlString);
-		pool.getConnection(function(err, connection) {
-			if (err) {
-				throw err;
-			} else {
-				connection.query(sqlString, function(err, rows) {
-					if (err) {
-						throw err;
-					} else {
-						fn(rows);
-					}
-					connection.release();
-					//异步释放连接
-				});
-			}
-		});
+	sever: function(pool, sqlString) {
+		return new Promise((resolve, reject) => {
+			console.log(sqlString);
+			pool.getConnection(function(err, connection) {
+				if (err) {
+					reject(err);
+				} else {
+					connection.query(sqlString, function(err, rows) {
+						if (err) {
+							reject(err);
+						} else {
+							resolve(rows);
+						}
+						connection.release();
+						//异步释放连接
+					});
+				}
+			});
+		})
 	},
-	//数据库操作应用
 
 	escape: mysql.escape,
 

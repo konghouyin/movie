@@ -1,8 +1,9 @@
 {
     "pages": [
+        "pages/index/index",
         "pages/main/main",
         "pages/play/play",
-        "pages/index/index",
+        
         "pages/search/search"
     ],
     "window": {
@@ -10,7 +11,7 @@
         "navigationBarTextStyle": "white",
         "navigationBarTitleText": "星云剧院在线购票",
         "backgroundColor": "#eeeeee",
-        "backgroundTextStyle": "light",
+        "backgroundTextStyle": "dark",
         "enablePullDownRefresh": true
     },
     "tabBar": {

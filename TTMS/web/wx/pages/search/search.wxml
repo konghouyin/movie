@@ -1,11 +1,11 @@
 <!--pages/search/search.wxml-->
 <view class="search-template">
     <image class="search-icon" src='/image/search.png'></image>
-    <input class="find-movie" maxlength="30" placeholder="找电影" confirm-type="search" bindinput="searchinput"></input>
+    <input class="find-movie" maxlength="30" placeholder="找电影" confirm-type="search" bindinput="searchinput" focus="true"></input>
     <text class="cancel" bindtouchend='backIndex'>取消</text>
 </view>
 
-<view class="movie-list" wx:for="{{searchMovie}}" wx:for-item="item">
+<view class="movie-list" wx:for="{{searchMovie}}" wx:for-item="item" data-id="{{item.id}}" bindtap="play">
     <image class="movie-hb" src="{{item.pic}}"></image>
     <view class='message'>
         <view class="movie-name">{{item.name}}</view>

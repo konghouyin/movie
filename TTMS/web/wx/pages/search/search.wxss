@@ -47,7 +47,8 @@ page {
     display: flex;
     flex-direction: row;
     font-size: 30rpx;
-    border-top: 2px solid #ccc;
+    border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
     padding: 25rpx 0;
 }
 

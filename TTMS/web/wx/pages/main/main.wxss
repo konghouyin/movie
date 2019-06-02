@@ -1,6 +1,6 @@
 /* pages/main/main.wxss */
-page{
-    background-color: #eee;
+page {
+	background-color: #eee;
 }
 
 .back-image {
@@ -61,28 +61,116 @@ page{
 }
 
 
-.part{
-    margin-bottom: 20rpx;
-    border-top:4rpx solid #ccc;
-    border-bottom:4rpx solid #ccc;
-    background-color: #fff;
-    padding: 30rpx;
+.part {
+	margin-bottom: 20rpx;
+	border-top: 4rpx solid #ccc;
+	border-bottom: 4rpx solid #ccc;
+	background-color: #fff;
+	padding: 30rpx 20rpx;
 }
 
-.message-hidden{
-    overflow: hidden;
+.part2{
+	margin-bottom: 20rpx;
+	border-top: 4rpx solid #ccc;
+	border-bottom: 4rpx solid #ccc;
+	background-color: #fff;
+	padding: 20rpx 20rpx 10rpx 20rpx;
+}
+
+.message-hidden {
+	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 3;
 	-webkit-box-orient: vertical;
 }
 
-.title{
-    font-size: 35rpx;
+.title {
+	font-size: 35rpx;
 }
 
 
-.index-message{
-    font-size: 30rpx;
-    line-height: 45rpx;
+.index-message {
+	font-size: 30rpx;
+	line-height: 45rpx;
+}
+
+.show-list {
+	display: flex;
+	flex-direction: row;
+	white-space: nowrap;
+}
+
+.person-each {
+	overflow: hidden;
+	width: 20vw;
+	display: inline-block;
+	margin: 15rpx;
+}
+
+.person-each .person-type,
+.person-each .person-name {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	text-align: center;
+}
+
+.person-each .person-type {
+	font-size: 24rpx;
+	color: #999;
+}
+
+.person-each .person-name {
+	font-size: 26rpx;
+}
+
+.person-pic {
+	width: 100%;
+	height: 200rpx;
+}
+
+
+.movie-each {
+	display: inline-block;
+	width: 45vw;
+	margin: 15rpx;
+	position: relative;
+}
+
+.pic-each {
+	display: inline-block;
+	width: 25vw;
+	margin: 15rpx;
+}
+
+.vidoe-play {
+	position: absolute;
+	width: 80rpx;
+	height: 80rpx;
+	top: 50%;
+	left: 50%;
+	margin-left: -40rpx;
+	margin-top: -40rpx;
+}
+
+
+.comment-time{
+	float: right;
+	font-size: 26rpx;
+	color:#999;
+}
+
+.comment-name{
+	float: left;
+}
+
+.comment-each{
+	border-top:2rpx solid #ccc ;
+	border-bottom:2rpx solid #ccc ;
+	padding: 30rpx 18rpx;
+}
+
+.comment-message{
+	font-size: 28rpx;
 }

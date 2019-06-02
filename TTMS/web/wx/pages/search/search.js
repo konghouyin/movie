@@ -12,10 +12,10 @@ function uniq(array) {
     })
     return back;
 }
+//通过set去重
 
 
 Page({
-
     searchinput(event) {
         var str = event.detail.value
         if (str.length == 0) {
@@ -44,43 +44,12 @@ Page({
             searchMovie: uniq(searchMovie)
         })
     },
+	//电影搜索
     /**
      * 页面的初始数据
      */
     data: {
-        allMovie: [{
-                pic: "https://img1.doubanio.com/view/photo/m/public/p2555859678.webp",
-                name: "一条狗的使命",
-                time: 120,
-                actor: "丹尼斯·奎德 / 凯瑟琳·普雷斯科特 / 刘宪华 / 玛格·海根柏格 / 贝蒂·吉尔平 ",
-                type: "剧情 / 喜剧 / 家庭"
-            }, {
-                pic: "https://img1.doubanio.com/view/photo/m/public/p2555859678.webp",
-                name: "一条狗的使命",
-                time: 120,
-                actor: "丹尼斯·奎德 / 凯瑟琳·普雷斯科特 / 刘宪华 / 玛格·海根柏格 / 贝蒂·吉尔平 ",
-                type: "剧情 / 喜剧 / 家庭"
-            }, {
-                pic: "https://img1.doubanio.com/view/photo/m/public/p2555859678.webp",
-                name: "一条狗的使命",
-                time: 120,
-                actor: "丹尼斯·奎德 / 凯瑟琳·普雷斯科特 / 刘宪华 / 玛格·海根柏格 / 贝蒂·吉尔平 ",
-                type: "剧情 / 喜剧 / 家庭"
-            }, {
-                pic: "https://img1.doubanio.com/view/photo/m/public/p2555859678.webp",
-                name: "一条狗的使命",
-                time: 120,
-                actor: "丹尼斯·奎德 / 凯瑟琳·普雷斯科特 / 刘宪华 / 玛格·海根柏格 / 贝蒂·吉尔平 ",
-                type: "剧情 / 喜剧 / 家庭"
-            }, {
-                pic: "https://img1.doubanio.com/view/photo/m/public/p2555859678.webp",
-                name: "一条狗的使命",
-                time: 120,
-                actor: "丹尼斯·奎德 / 凯瑟琳·普雷斯科特 / 刘宪华 / 玛格·海根柏格 / 贝蒂·吉尔平 ",
-                type: "剧情 / 喜剧 / 家庭"
-            }
-
-        ],
+        allMovie: [],
         searchMovie: []
     },
 
@@ -88,11 +57,16 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        this.data.allMovie.forEach(function(item, index) {
+		var allMovie = JSON.parse(options.allMovie);
+        allMovie.forEach(function(item, index) {
             query(item.name).forEach(function(child, index) {
                 Movieindex.set(child, item);
             })
         })
+		this.setData({
+			allMovie:allMovie
+		})
+		
     },
 
     /**
@@ -147,7 +121,14 @@ Page({
         wx.navigateBack({
             delta: 1
         });
-    }
+    },
+	
+	play(event) {
+		var id = event.currentTarget.dataset.id;
+		wx.navigateTo({
+			url: '/pages/play/play?id=' + id
+		})
+	}
 })
 
 
@@ -573,19 +554,6 @@ function mkRslt(arr) {
                 }
             }
             arrRslt = mid;
-
-            // var tmpArr = arrRslt.slice(0);
-            // arrRslt = [];
-            // for (k = 0; k < strlen; k++) {
-            // 	//复制一个相同的arrRslt
-            // 	var tmp = tmpArr.slice(0);
-            // 	//把当前字符str[k]添加到每个元素末尾
-            // 	for (var j = 0; j < tmp.length; j++) {
-            // 		tmp[j] += str.charAt(k);
-            // 	}
-            // 	//把复制并修改后的数组连接到arrRslt上
-            // 	arrRslt = arrRslt.concat(tmp);
-            // }
         }
     }
     return arrRslt;
